@@ -1,10 +1,18 @@
 public class LoggingConfig {
 
-    private boolean timeStamp;
-    private boolean line;
-    private boolean fileName;
-    private boolean threadId;
-    private boolean processID;
+    private final boolean timeStamp;
+    private final boolean line;
+    private final boolean fileName;
+    private final boolean threadId;
+    private final boolean processID;
+
+    public LoggingConfig(Builder builder) {
+        this.timeStamp = builder.timeStamp;
+        this.line = builder.line;
+        this.fileName = builder.fileName;
+        this.threadId = builder.threadId;
+        this.processID = builder.processID;
+    }
     public boolean isTimeStamp() {
         return timeStamp;
     }
@@ -25,27 +33,39 @@ public class LoggingConfig {
         return processID;
     }
 
-    public LoggingConfig withTimeStamp(boolean timeStamp){
-        this.timeStamp = timeStamp;
-        return this;
-    }
-    public LoggingConfig withLine(boolean line){
-        this.line = line;
-        return this;
-    }
+    static class Builder {
+        private boolean timeStamp;
+        private boolean line;
+        private boolean fileName;
+        private boolean threadId;
+        private boolean processID;
 
-    public LoggingConfig withFileName(boolean fileName){
-        this.fileName = fileName;
-        return this;
-    }
 
-    public LoggingConfig withThreadId(boolean threadId){
-        this.threadId = threadId;
-        return this;
-    }
+        public Builder withTimeStamp(){
+            this.timeStamp = true;
+            return this;
+        }
+        public Builder withLine(){
+            this.line = true;
+            return this;
+        }
 
-    public LoggingConfig withProcessID(boolean processID){
-        this.processID = processID;
-        return this;
+        public Builder withFileName(){
+            this.fileName = true;
+            return this;
+        }
+
+        public Builder withThreadId(){
+            this.threadId = true;
+            return this;
+        }
+
+        public Builder withProcessID(){
+            this.processID = true;
+            return this;
+        }
+        public LoggingConfig build() {
+            return new LoggingConfig(this);
+        }
     }
 }
