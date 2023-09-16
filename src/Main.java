@@ -1,9 +1,15 @@
 public class Main {
 
     public static void main(String[] args) {
-        LoggerFactory factory = new ConsoleLoggerFactory();
+        LoggingConfig config = new LoggingConfig()
+                .withLine(true)
+                .withTimeStamp(true)
+                .withProcessID(true)
+                .withThreadId(true)
+                .withFileName(true);
+        LoggerFactory factory = new ConsoleLoggerFactory(config);
         Logger ConsoleLogger = factory.createLogger();
-        ConsoleLogger.log("hello, this is from line 9 in file: main");
+        ConsoleLogger.log("Not allowed to use function like this!");
     }
 
 
