@@ -1,4 +1,4 @@
-public class LoggingConfig {
+public class LoggingConfig extends BaseBuilder {
 
     private final boolean timeStamp;
     private final boolean line;
@@ -7,11 +7,11 @@ public class LoggingConfig {
     private final boolean processID;
 
     public LoggingConfig(Builder builder) {
-        this.timeStamp = builder.timeStamp;
-        this.line = builder.line;
-        this.fileName = builder.fileName;
-        this.threadId = builder.threadId;
-        this.processID = builder.processID;
+        this.timeStamp = builder.isTimeStamp();
+        this.line = builder.isLine();
+        this.fileName = builder.isFileName();
+        this.threadId = builder.isThreadId();
+        this.processID = builder.isProcessID();
     }
     public boolean isTimeStamp() {
         return timeStamp;
@@ -33,39 +33,4 @@ public class LoggingConfig {
         return processID;
     }
 
-    static class Builder {
-        private boolean timeStamp;
-        private boolean line;
-        private boolean fileName;
-        private boolean threadId;
-        private boolean processID;
-
-
-        public Builder withTimeStamp(){
-            this.timeStamp = true;
-            return this;
-        }
-        public Builder withLine(){
-            this.line = true;
-            return this;
-        }
-
-        public Builder withFileName(){
-            this.fileName = true;
-            return this;
-        }
-
-        public Builder withThreadId(){
-            this.threadId = true;
-            return this;
-        }
-
-        public Builder withProcessID(){
-            this.processID = true;
-            return this;
-        }
-        public LoggingConfig build() {
-            return new LoggingConfig(this);
-        }
-    }
 }
